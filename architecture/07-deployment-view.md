@@ -4,7 +4,7 @@
 
 PacMan runs as a single Python process inside a terminal emulator. There are no servers, containers, or network infrastructure.
 
-![Deployment View](diagrams/deployment-view.puml)
+![Deployment View](diagrams/deployment-view.svg)
 
 ## 7.2 Deployment Nodes
 

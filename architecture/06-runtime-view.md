@@ -4,7 +4,7 @@
 
 The core game loop runs a fixed-timestep cycle every tick:
 
-![Sequence — Game Loop](diagrams/sequence-game-loop.puml)
+![Sequence — Game Loop](diagrams/sequence-game-loop.svg)
 
 1. **Input**: Poll keyboard for player command (non-blocking)
 2. **Update**: Move PacMan based on command, then update all ghost positions via AI
@@ -15,7 +15,7 @@ The core game loop runs a fixed-timestep cycle every tick:
 
 When PacMan eats a power pellet, all ghosts enter frightened mode temporarily.
 
-![Sequence — Power Pellet](diagrams/sequence-power-pellet.puml)
+![Sequence — Power Pellet](diagrams/sequence-power-pellet.svg)
 
 1. CollisionDetector publishes `PowerPelletEaten` on the EventBus
 2. PlayerModule subscribes — adds 50 points to score
@@ -27,7 +27,7 @@ When PacMan eats a power pellet, all ghosts enter frightened mode temporarily.
 
 Two outcomes depending on ghost mode at the moment of collision.
 
-![Sequence — Ghost Collision](diagrams/sequence-ghost-collision.puml)
+![Sequence — Ghost Collision](diagrams/sequence-ghost-collision.svg)
 
 **Chase/Scatter mode** (ghost kills PacMan):
 1. `GhostCollision{mode=CHASE}` published

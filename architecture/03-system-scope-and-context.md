@@ -26,7 +26,7 @@ There are no network interfaces, databases, or file system dependencies at runti
 
 ## 3.3 C4 System Context Diagram
 
-![C4 System Context](diagrams/c4-context.puml)
+![C4 System Context](diagrams/c4-context.svg)
 
 ```plantuml
 @startuml c4-context

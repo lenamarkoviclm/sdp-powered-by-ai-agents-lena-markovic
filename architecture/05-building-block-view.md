@@ -4,7 +4,7 @@
 
 The system is composed of six containers within a single Python process.
 
-![C4 Container Diagram](diagrams/c4-container.puml)
+![C4 Container Diagram](diagrams/c4-container.svg)
 
 | Container       | Responsibility                                              |
 |-----------------|-------------------------------------------------------------|
@@ -21,7 +21,7 @@ The Game Engine orchestrates each tick. Domain modules (Maze, Player, Ghost) own
 
 ## 5.2 Level 2 — Component View: Game Engine
 
-![Component Diagram — Game Engine](diagrams/c4-component-engine.puml)
+![Component Diagram — Game Engine](diagrams/c4-component-engine.svg)
 
 | Component          | Responsibility                                           |
 |--------------------|----------------------------------------------------------|
@@ -33,7 +33,7 @@ The Game Engine orchestrates each tick. Domain modules (Maze, Player, Ghost) own
 
 ## 5.3 Level 2 — Component View: Ghost Module
 
-![Component Diagram — Ghost Module](diagrams/c4-component-ghost.puml)
+![Component Diagram — Ghost Module](diagrams/c4-component-ghost.svg)
 
 | Component         | Responsibility                                                  |
 |-------------------|-----------------------------------------------------------------|

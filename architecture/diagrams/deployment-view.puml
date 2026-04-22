@@ -1,0 +1,16 @@
+@startuml deployment-view
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Deployment.puml
+
+title Deployment View — PacMan Game
+
+Deployment_Node(machine, "Player's Machine", "Linux / macOS / Windows") {
+    Deployment_Node(terminal, "Terminal Emulator", "bash / zsh / cmd") {
+        Deployment_Node(python, "Python 3.12 Runtime", "CPython") {
+            Container(game, "PacMan Game", "Python", "Single process: game engine, modules, curses renderer")
+        }
+    }
+}
+
+Rel(terminal, game, "stdin/stdout via curses")
+
+@enduml

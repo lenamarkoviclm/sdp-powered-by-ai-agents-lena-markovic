@@ -1,0 +1,25 @@
+@startuml sequence-game-loop
+title Game Loop — Single Tick
+
+participant "InputHandler" as input
+participant "GameLoop" as loop
+participant "PlayerModule" as player
+participant "GhostModule" as ghost
+participant "CollisionDetector" as collision
+participant "EventBus" as events
+participant "Renderer" as renderer
+
+loop every tick
+    loop -> input: poll_input()
+    input --> loop: command (e.g. MOVE_LEFT)
+
+    loop -> player: update(command)
+    loop -> ghost: update_all()
+    loop -> collision: check()
+
+    collision -> events: publish(PelletEaten / GhostCollision)
+
+    loop -> renderer: render(game_state)
+end
+
+@enduml

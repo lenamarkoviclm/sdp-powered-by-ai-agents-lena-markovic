@@ -1,0 +1,30 @@
+@startuml sequence-power-pellet
+title Power Pellet Eaten — Ghost Frightened Sequence
+
+participant "CollisionDetector" as collision
+participant "EventBus" as events
+participant "PlayerModule" as player
+participant "GhostStateMachine" as gsm
+participant "LevelManager" as level
+
+collision -> events: publish(PowerPelletEaten)
+
+events -> player: on(PowerPelletEaten)
+player -> player: add_score(50)
+
+events -> gsm: on(PowerPelletEaten)
+gsm -> level: get_frightened_duration()
+level --> gsm: duration (level-dependent)
+gsm -> gsm: transition_all(FRIGHTENED, duration)
+
+note right of gsm
+  All ghosts enter frightened mode.
+  They reverse direction and use
+  random movement until timer expires.
+end note
+
+... timer expires ...
+
+gsm -> gsm: transition_all(previous_mode)
+
+@enduml

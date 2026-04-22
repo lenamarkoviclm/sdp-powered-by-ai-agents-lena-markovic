@@ -1,0 +1,21 @@
+@startuml c4-component-ghost
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+title Component Diagram — Ghost Module
+
+Container_Boundary(ghost, "Ghost Module") {
+    Component(ghost_entity, "Ghost", "Python", "Ghost entity with position, type, current mode")
+    Component(state_machine, "GhostStateMachine", "Python", "Manages mode transitions: chase, scatter, frightened, eaten")
+    Component(blinky, "BlinkyStrategy", "Python", "Targets PacMan's current tile directly")
+    Component(pinky, "PinkyStrategy", "Python", "Targets 4 tiles ahead of PacMan")
+    Component(inky, "InkyStrategy", "Python", "Targets using Blinky's position and PacMan's facing")
+    Component(clyde, "ClydeStrategy", "Python", "Targets PacMan when far, scatter corner when close")
+}
+
+Rel(ghost_entity, state_machine, "Delegates mode logic")
+Rel(state_machine, blinky, "Uses when ghost is Blinky in chase mode")
+Rel(state_machine, pinky, "Uses when ghost is Pinky in chase mode")
+Rel(state_machine, inky, "Uses when ghost is Inky in chase mode")
+Rel(state_machine, clyde, "Uses when ghost is Clyde in chase mode")
+
+@enduml

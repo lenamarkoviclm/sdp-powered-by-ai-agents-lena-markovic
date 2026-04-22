@@ -1,0 +1,20 @@
+@startuml c4-component-engine
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+title Component Diagram — Game Engine
+
+Container_Boundary(engine, "Game Engine") {
+    Component(loop, "GameLoop", "Python", "Fixed-timestep input/update/render cycle")
+    Component(state, "GameStateManager", "Python", "Manages game states: menu, playing, paused, game-over")
+    Component(level, "LevelManager", "Python", "Tracks current level, adjusts difficulty parameters")
+    Component(event_bus, "EventBus", "Python", "Publish/subscribe event dispatcher")
+    Component(collision, "CollisionDetector", "Python", "Detects PacMan-ghost and PacMan-pellet collisions")
+}
+
+Rel(loop, state, "Checks current state")
+Rel(loop, collision, "Runs collision checks per tick")
+Rel(collision, event_bus, "Publishes PelletEaten, GhostCollision")
+Rel(state, level, "Advances level on maze cleared")
+Rel(level, event_bus, "Publishes LevelStarted")
+
+@enduml

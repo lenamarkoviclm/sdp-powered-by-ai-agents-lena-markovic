@@ -5,6 +5,7 @@ repos:
     hooks:
       - id: trailing-whitespace
       - id: end-of-file-fixer
+        exclude: '\.svg$'
       - id: check-yaml
       - id: check-json
       - id: check-toml
@@ -43,6 +44,16 @@ repos:
     rev: v1.5.0
     hooks:
       - id: detect-secrets
+
+  # PlantUML SVG generation
+  - repo: local
+    hooks:
+      - id: plantuml-validation
+        name: PlantUML Validation
+        entry: bash scripts/hooks/validate-plantuml.sh
+        language: system
+        files: '\.puml$'
+        pass_filenames: false
 
   # Commit message format
   - repo: local

@@ -1,0 +1,16 @@
+@startuml c4-context
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+title System Context Diagram — PacMan Game
+
+Person(player, "Player", "Controls PacMan using keyboard input")
+
+System(pacman_system, "PacMan Game", "Classic arcade game: navigate a maze, eat pellets, avoid ghosts, score points")
+
+System_Ext(terminal, "Terminal / Console", "Renders the game grid and accepts keyboard input")
+
+Rel(player, pacman_system, "Sends movement commands")
+Rel(pacman_system, terminal, "Renders game state")
+Rel(terminal, player, "Displays maze, score, lives")
+
+@enduml

@@ -1,0 +1,43 @@
+@startuml sequence-ghost-collision
+title Ghost Collision Scenarios
+
+participant "CollisionDetector" as collision
+participant "EventBus" as events
+participant "PlayerModule" as player
+participant "GhostStateMachine" as gsm
+participant "GameStateManager" as state
+
+== PacMan hits ghost in CHASE/SCATTER mode ==
+
+collision -> events: publish(GhostCollision{mode=CHASE})
+
+events -> player: on(GhostCollision)
+player -> player: lose_life()
+
+alt lives > 0
+    player -> events: publish(LifeLost)
+    events -> state: on(LifeLost)
+    state -> state: reset_positions()
+else lives == 0
+    player -> events: publish(GameOver)
+    events -> state: on(GameOver)
+    state -> state: transition(GAME_OVER)
+end
+
+== PacMan hits ghost in FRIGHTENED mode ==
+
+collision -> events: publish(GhostCollision{mode=FRIGHTENED})
+
+events -> player: on(GhostCollision)
+player -> player: add_score(200 * multiplier)
+
+events -> gsm: on(GhostCollision)
+gsm -> gsm: transition_ghost(EATEN)
+
+note right of gsm
+  Eaten ghost navigates
+  back to ghost house,
+  then respawns.
+end note
+
+@enduml

@@ -1,0 +1,28 @@
+@startuml c4-container
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+title Container Diagram — PacMan Game
+
+Person(player, "Player", "Controls PacMan via keyboard")
+
+System_Boundary(pacman, "PacMan Game") {
+    Container(input, "Input Handler", "Python / curses", "Captures keyboard events, translates to game commands")
+    Container(engine, "Game Engine", "Python", "Game loop, state management, level progression, event bus")
+    Container(maze, "Maze Module", "Python", "Grid structure, walls, pellet tracking")
+    Container(player_mod, "Player Module", "Python", "PacMan movement, lives, score")
+    Container(ghost, "Ghost Module", "Python", "Ghost AI, state machine, targeting strategies")
+    Container(renderer, "Renderer", "Python / curses", "Draws game state to terminal")
+}
+
+System_Ext(terminal, "Terminal / Console", "Display and keyboard")
+
+Rel(player, terminal, "Keyboard input")
+Rel(terminal, input, "Key events")
+Rel(input, engine, "Movement commands")
+Rel(engine, maze, "Reads/updates grid")
+Rel(engine, player_mod, "Updates position, score, lives")
+Rel(engine, ghost, "Triggers AI updates")
+Rel(engine, renderer, "Passes game state")
+Rel(renderer, terminal, "Draws frames")
+
+@enduml
